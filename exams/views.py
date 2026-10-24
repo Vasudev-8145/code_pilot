@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication,permissions
 from rest_framework.exceptions import ValidationError
+from rest_framework.generics import ListAPIView,CreateAPIView
 
 from exams.models import Assessment
 from accounts.models import User
@@ -12,60 +13,75 @@ from exams.permissions import OwnerOnly
 
 from datetime import datetime,time,timedelta
 
-class AssessmentListCreateView(APIView):
+class AssessmentListView(ListAPIView):
 
     authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
-    def get(self,request):
+    # def get(self,request):
 
-        instance = Assessment.objects.filter(created_by=request.user)
+    #     instance = Assessment.objects.filter(created_by=request.user)
 
-        serializer_instance = AssessmentSerializer(instance,many=True)
+    #     serializer_instance = AssessmentSerializer(instance,many=True)
 
-        return Response(data=serializer_instance.data)
+    #     return Response(data=serializer_instance.data)
 
-    def post(self,request):
+    serializer_class = AssessmentSerializer
+    queryset = Assessment.objects.all()
 
-        form_data = request.data
+class AssessmentCreateView(CreateAPIView):
 
-        serializer_instance = AssessmentSerializer(data=form_data)
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAdminUser]
 
-        if serializer_instance.is_valid():
+    serializer_class = AssessmentSerializer
 
-            cleaned_data = serializer_instance.validated_data    
+    def perform_create(self, serializer):
 
-            exam_id = cleaned_data.get("id")
-            exam_date = cleaned_data.get("exam_date")
-            start_time = cleaned_data.get("start_time")
-            duration = cleaned_data.get("duration")
+        serializer.save(created_by=self.request.user)
 
-            exam_end_datetime = (datetime.combine(exam_date,start_time)+timedelta(hours=duration))
+    # def post(self,request):
 
-            end_time = exam_end_datetime.time()
+    #     form_data = request.data
 
-            existing_assessments = Assessment.objects.filter(exam_date=exam_date)
+    #     serializer_instance = AssessmentSerializer(data=form_data)
 
-            for assessments in existing_assessments:
+    #     if serializer_instance.is_valid():
 
-                existing_start = assessments.start_time
-                exisiting_end = assessments.end_time
+    #         serializer_instance.save(created_by=request.user)
 
-                if start_time<exisiting_end and end_time>existing_start:
+            # cleaned_data = serializer_instance.validated_data    
 
-                    raise ValidationError({"assessment_time":"there is already an assessment on the entered time"})
+            # exam_date = cleaned_data.get("exam_date")
+            # start_time = cleaned_data.get("start_time")
+            # duration = cleaned_data.get("duration")
 
-            cleaned_data["end_time"] = end_time
+            # exam_end_datetime = (datetime.combine(exam_date,start_time)+timedelta(hours=duration))
 
-            instance = Assessment.objects.create(**cleaned_data,created_by=request.user)
+            # end_time = exam_end_datetime.time()
 
-            serializer_instance = AssessmentSerializer(instance)
+            # existing_assessments = Assessment.objects.filter(exam_date=exam_date)
 
-            return Response(data=serializer_instance.data)
+            # for assessments in existing_assessments:
 
-        else:
+            #     existing_start = assessments.start_time
+            #     exisiting_end = assessments.end_time
 
-            return Response(data=serializer_instance.errors)
+            #     if start_time<exisiting_end and end_time>existing_start:
+
+            #         raise ValidationError({"assessment_time":"there is already an assessment on the entered time"})
+
+            # cleaned_data["end_time"] = end_time
+
+            # instance = Assessment.objects.create(**cleaned_data,created_by=request.user)
+
+            # serializer_instance = AssessmentSerializer(instance)
+
+        #     return Response(data=serializer_instance.data)
+
+        # else:
+
+        #     return Response(data=serializer_instance.errors)
 
 class AssessmentRetrieveUpdateDeleteView(APIView):
 

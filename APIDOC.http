@@ -41,21 +41,21 @@ Content-Type: application/json
 
 # api call for assessment listing
 ###
-GET http://127.0.0.1:8000/exams/assessment/
+GET http://127.0.0.1:8000/exams/assessment/all/
 Accept: application/json
 Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
 
 # api call for creating assessment
 ###
-POST http://127.0.0.1:8000/exams/assessment/
+POST http://127.0.0.1:8000/exams/assessment/add/
 Content-Type: application/json
 Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
 
 {
-    "title":"assessment 4",
-    "batch":"august 2k26",
+    "title":"assessment 6",
+    "batch":"june 2k26",
     "language":"html",
-    "exam_date":"2026-10-23",
+    "exam_date":"2026-10-24",
     "start_time":"11",
     "duration":2,
     "status":"submitted"
@@ -92,6 +92,6 @@ Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
 
 # api call for deleting one assessment
 ###
-DELETE http://127.0.0.1:8000/exams/assessment/4/
+DELETE http://127.0.0.1:8000/exams/assessment/5/
 Accept: application/json
 Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
