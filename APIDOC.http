@@ -7,10 +7,10 @@ POST http://127.0.0.1:8000/accounts/admin/register/
 Content-Type: application/json
 
 {
-    "username":"admin",
-    "email":"admin@gmail.com",
-    "password":"admin123",
-    "phone":"789456123"
+    "username":"adminB",
+    "email":"adminB@gmail.com",
+    "password":"adminB123",
+    "phone":"779456123"
 }
 
 # api call for student create view
@@ -31,8 +31,8 @@ POST http://127.0.0.1:8000/exams/assessment/token/
 Content-Type: application/json
 
 {
-    "username":"admin",
-    "password":"admin123"
+    "username":"adminB",
+    "password":"adminB123"
 }
 
 
@@ -49,16 +49,16 @@ Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
 ###
 POST http://127.0.0.1:8000/exams/assessment/add/
 Content-Type: application/json
-Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
+Authorization: Token a630b58450aaa7f1ab2b70c7b23bbeadad7b3e83
 
 {
-    "title":"assessment 6",
+    "title":"django-first-exam",
     "batch":"june 2k26",
-    "language":"html",
-    "exam_date":"2026-10-24",
-    "start_time":"11",
+    "language":"python",
+    "exam_date":"2026-10-30",
+    "start_time":"10",
     "duration":2,
-    "status":"submitted"
+    "status":"pending"
 }
 
 
@@ -93,5 +93,52 @@ Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
 # api call for deleting one assessment
 ###
 DELETE http://127.0.0.1:8000/exams/assessment/5/
+Accept: application/json
+Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
+
+
+# ========= QUESTION CREATE VIEW ============= #
+
+
+# api call for creating questions
+###
+POST http://127.0.0.1:8000/problem/assessment/8/question/
+Content-Type: application/json
+Authorization: Token a630b58450aaa7f1ab2b70c7b23bbeadad7b3e83
+
+{
+    "title":"create a basic crud for job_card",
+    "description":"write code for creating basic crud application for job_card",
+    "score":40
+}
+
+# api call for listing one question
+###
+GET http://127.0.0.1:8000/problem/question/1/
+Accept: application/json
+Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
+
+# api call for updating one question details
+###
+PUT http://127.0.0.1:8000/problem/question/1/
+Content-Type: application/json
+Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
+
+{
+  "id": 1,
+  "assessment": "assessment 1",
+  "created_by": "admin",
+  "title": "add two numbers",
+  "description": "write a code for adding two number",
+  "score": 10,
+  "sample_input": "num1=10 num2=20",
+  "sample_output": "result = 30",
+  "created_at": "2026-10-26T06:02:22.501753Z",
+  "updated_at": "2026-10-26T06:02:22.501753Z"
+}
+
+# api call for deleting one question
+###
+DELETE http://127.0.0.1:8000/problem/question/4/
 Accept: application/json
 Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7

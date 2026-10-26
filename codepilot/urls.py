@@ -25,4 +25,7 @@ urlpatterns = [
 
     # route to exams
     path("exams/",include("exams.urls")),
+
+    # route to problems
+    path("problem/",include("problem.urls")),
 ]
