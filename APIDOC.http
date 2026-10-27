@@ -52,7 +52,7 @@ Content-Type: application/json
 Authorization: Token a630b58450aaa7f1ab2b70c7b23bbeadad7b3e83
 
 {
-    "title":"django-first-exam",
+    "title":"django-second-exam",
     "batch":"june 2k26",
     "language":"python",
     "exam_date":"2026-10-30",

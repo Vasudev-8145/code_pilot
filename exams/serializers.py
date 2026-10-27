@@ -4,10 +4,22 @@ from rest_framework import serializers
 from datetime import datetime
 
 from exams.models import Assessment
+from problem.models import Question
+from problem.serializers import QuestionSeriazizer
+
+from django.db.models import Sum
 
 class AssessmentSerializer(serializers.ModelSerializer):
 
     created_by = serializers.StringRelatedField()
+
+    greetings = serializers.SerializerMethodField(read_only=True)
+
+    question_count = serializers.SerializerMethodField(read_only=True)
+
+    total_marks = serializers.SerializerMethodField(read_only=True)
+
+    questions = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
 
@@ -26,4 +38,23 @@ class AssessmentSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Please enter a valid exam_date")
 
         return validated_data
-        
+
+    def get_greetings(self,obj):
+
+        return "Good Morning"
+
+    def get_question_count(self,obj):
+
+        return Question.objects.filter(assessment=obj).count()
+
+    def get_total_marks(self,obj):
+
+        return Question.objects.filter(assessment=obj).values("score").aggregate(total=Sum("score")).get("total")
+
+    def get_questions(self,obj):
+
+        question_object = Question.objects.filter(assessment=obj)
+
+        serializer_instance = QuestionSeriazizer(question_object,many=True)
+
+        return serializer_instance.data

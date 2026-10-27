@@ -28,4 +28,7 @@ urlpatterns = [
 
     # route to problems
     path("problem/",include("problem.urls")),
+
+    # route to evaluation[submission,answer]
+    path("evaluation/",include("evaluation.urls")),
 ]

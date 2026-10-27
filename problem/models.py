@@ -5,7 +5,7 @@ from accounts.models import User
 
 class Question(models.Model):
 
-    question_number = models.PositiveIntegerField(null=True)
+    question_number = models.PositiveIntegerField(default=0)
 
     title = models.CharField(max_length=200)
 
