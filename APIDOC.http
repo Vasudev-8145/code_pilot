@@ -31,8 +31,8 @@ POST http://127.0.0.1:8000/exams/assessment/token/
 Content-Type: application/json
 
 {
-    "username":"adminB",
-    "password":"adminB123"
+    "username":"studentA",
+    "password":"studentA123"
 }
 
 
@@ -52,10 +52,10 @@ Content-Type: application/json
 Authorization: Token a630b58450aaa7f1ab2b70c7b23bbeadad7b3e83
 
 {
-    "title":"django-second-exam",
-    "batch":"june 2k26",
+    "title":"python-core-exam",
+    "batch":"may-2k26",
     "language":"python",
-    "exam_date":"2026-10-30",
+    "exam_date":"2026-11-05",
     "start_time":"10",
     "duration":2,
     "status":"pending"
@@ -67,7 +67,7 @@ Authorization: Token a630b58450aaa7f1ab2b70c7b23bbeadad7b3e83
 
 # api call for one assessment listing
 ###
-GET http://127.0.0.1:8000/exams/assessment/1/
+GET http://127.0.0.1:8000/exams/assessment/2/
 Accept: application/json
 Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
 
@@ -102,13 +102,13 @@ Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
 
 # api call for creating questions
 ###
-POST http://127.0.0.1:8000/problem/assessment/8/question/
+POST http://127.0.0.1:8000/problem/assessment/11/question/
 Content-Type: application/json
 Authorization: Token a630b58450aaa7f1ab2b70c7b23bbeadad7b3e83
 
 {
-    "title":"create a basic crud for job_card",
-    "description":"write code for creating basic crud application for job_card",
+    "title":"display hello world",
+    "description":"display hello world",
     "score":40
 }
 
@@ -142,3 +142,28 @@ Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
 DELETE http://127.0.0.1:8000/problem/question/4/
 Accept: application/json
 Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
+
+
+# ========= SUBMISSION START VIEW ============= #
+
+
+# api call for submission start
+###
+POST http://127.0.0.1:8000/evaluation/assessment/11/submission/
+Content-Type: application/json
+Authorization: Token 4d24e95f0bf70caf994558ea92fd94d5736ae10b
+
+
+# ========= ANSWER CREATE VIEW ============= #
+
+
+# api call to add answer
+###
+POST http://127.0.0.1:8000/evaluation/submission/4/answer/
+Content-Type: application/json
+Authorization: Token 4d24e95f0bf70caf994558ea92fd94d5736ae10b
+
+{
+    "question":8,
+    "answer_text":"print('helloworld')"
+}
