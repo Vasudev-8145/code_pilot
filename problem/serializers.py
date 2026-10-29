@@ -5,8 +5,8 @@ from problem.models import Question
 
 class QuestionSeriazizer(serializers.ModelSerializer):
 
-    assessment = serializers.StringRelatedField()
-    created_by = serializers.StringRelatedField()
+    assessment = serializers.StringRelatedField(read_only=True)
+    created_by = serializers.StringRelatedField(read_only=True)
 
     class Meta:
 

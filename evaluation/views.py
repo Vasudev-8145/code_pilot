@@ -3,11 +3,13 @@ from django.shortcuts import render,get_object_or_404
 from rest_framework.views import APIView
 from rest_framework import authentication,permissions
 from rest_framework.response import Response
+from rest_framework import serializers
 
 from evaluation.permissions import IsStudentUser
 from exams.models import Assessment
 from evaluation.models import Submission
 from evaluation.serializers import SubmissionSerializer,AnswerSerializer
+from problem.models import Question
 
 class SubmissionStartView(APIView):
 
@@ -39,6 +41,19 @@ class AnswerCreateView(APIView):
 
         form_data = request.data
 
+        # validation start
+
+        assessment_object = submission_object.assessment
+        assessment_questions = Question.objects.filter(assessment=assessment_object).values_list("id",flat=True)
+
+        questions = form_data.get("question")
+
+        if questions not in assessment_questions:
+
+            raise serializers.ValidationError("Invalid question, question does not exist in assessment")
+
+        # validation end
+
         serializer_instance = AnswerSerializer(data=form_data)
 
         if serializer_instance.is_valid():
@@ -50,3 +65,18 @@ class AnswerCreateView(APIView):
         else:
 
             return Response(data=serializer_instance.errors)
+
+class SubmissionRetrieveView(APIView):
+
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAdminUser]
+
+    def get(self,request,pk=None):
+
+        instance = get_object_or_404(Submission,id=pk)
+
+        serializer_instance = SubmissionSerializer(instance)
+
+        return Response(data=serializer_instance.data)
+
+    

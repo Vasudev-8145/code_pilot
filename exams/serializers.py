@@ -11,7 +11,7 @@ from django.db.models import Sum
 
 class AssessmentSerializer(serializers.ModelSerializer):
 
-    created_by = serializers.StringRelatedField()
+    created_by = serializers.StringRelatedField(read_only=True)
 
     greetings = serializers.SerializerMethodField(read_only=True)
 
