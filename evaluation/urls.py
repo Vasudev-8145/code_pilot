@@ -3,6 +3,7 @@ from django.urls import path
 
 from evaluation.views import SubmissionStartView,AnswerCreateView
 from evaluation.views import SubmissionRetrieveView
+from evaluation.views import AnswerUpdateView
 
 urlpatterns = [
 
@@ -14,4 +15,7 @@ urlpatterns = [
 
     # route to submission retrieve view
     path("submission/<int:pk>/",SubmissionRetrieveView.as_view()),
+
+    # route to answer update view
+    path("answer/<int:pk>/",AnswerUpdateView.as_view()),
 ]

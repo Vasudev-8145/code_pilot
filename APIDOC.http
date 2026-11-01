@@ -176,11 +176,11 @@ Authorization: Token 4d24e95f0bf70caf994558ea92fd94d5736ae10b
 
 # answer evaluate
 ###
-PUT http://127.0.0.1:8000/evaluation/answer/1/
+PATCH http://127.0.0.1:8000/evaluation/answer/4/
 Content-Type: application/json
-Authorization: Token 4d24e95f0bf70caf994558ea92fd94d5736ae10b
+Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
 
 {
-    "marks_awarded":2,
-    "feedback":"poor"
+    "marks_awarded":15,
+    "feedback":"good"
 }

@@ -2,6 +2,7 @@
 from rest_framework import serializers
 
 from evaluation.models import Submission,Answer
+from problem.models import Question
 
 class SubmissionSerializer(serializers.ModelSerializer):
 
@@ -39,7 +40,7 @@ class SubmissionSerializer(serializers.ModelSerializer):
 class AnswerSerializer(serializers.ModelSerializer):
 
     submission = serializers.StringRelatedField(read_only=True)
-    question = serializers.StringRelatedField(read_only=True)
+    question = serializers.PrimaryKeyRelatedField(queryset=Question.objects.all())
 
 
     class Meta:
@@ -49,5 +50,8 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
         read_only_fields = ["id","submission","marks_awarded","feedback","evaluated_at"]
+
+    
+        
 
         
