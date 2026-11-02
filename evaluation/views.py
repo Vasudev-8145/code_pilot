@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework.generics import UpdateAPIView
 
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from evaluation.permissions import IsStudentUser
 from exams.models import Assessment
 from evaluation.models import Submission,Answer
@@ -14,8 +16,8 @@ from problem.models import Question
 
 class SubmissionStartView(APIView):
 
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [IsStudentUser]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated,IsStudentUser]
 
     def post(self,request,pk=None):
 

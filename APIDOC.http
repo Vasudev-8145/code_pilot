@@ -35,6 +35,25 @@ Content-Type: application/json
     "password":"studentA123"
 }
 
+# api call for jwt token creation
+###
+POST http://127.0.0.1:8000/accounts/jwt/token/
+Content-Type: application/json
+
+{
+    "username":"studentA",
+    "password":"studentA123"
+}
+
+# api call for refresh jwt token
+###
+POST http://127.0.0.1:8000/accounts/jwt/token/refresh/
+Content-Type: application/json
+
+{
+    "refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc5MzY4ODQwMywiaWF0IjoxNzkzNjAyMDAzLCJqdGkiOiIwMzYxZmY1ODk0YTk0ZDEwYmJiMDRiNjRiYTYzNWQ2NiIsInVzZXJfaWQiOiIyIn0.B9wMWiQtQsuHMhctRCdnljFXdy64Go_mr44UQFvIYVE"
+}
+
 
 # ========= ASSESSMENT LIST,CREATE VIEW ============= #
 
@@ -149,9 +168,9 @@ Authorization: Token 686e6d4735700c8be8b19b422bf3d75131ec50c7
 
 # api call for submission start
 ###
-POST http://127.0.0.1:8000/evaluation/assessment/7/submission/
+POST http://127.0.0.1:8000/evaluation/assessment/6/submission/
 Content-Type: application/json
-Authorization: Token 4d24e95f0bf70caf994558ea92fd94d5736ae10b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzNjAyMDc0LCJpYXQiOjE3OTM2MDE3NzQsImp0aSI6IjcxZDRiNTA5NzU0OTQ3ZjlhY2Y0ODZmYjMyODdhYThiIiwidXNlcl9pZCI6IjIifQ.5Mwf6MEd4wdIdfG66MLQrqSwMyKXcKXEMD3Pwc70uxk
 
 # api call for submission retrieve 
 ###
