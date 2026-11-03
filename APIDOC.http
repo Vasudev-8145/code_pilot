@@ -19,11 +19,32 @@ POST http://127.0.0.1:8000/accounts/student/register/
 Content-Type: application/json
 
 {
-    "username":"studentB",
-    "email":"studentB@gmail.com",
-    "password":"studentB123",
-    "phone":"458797123"
+    "username":"studentc",
+    "email":"studentc@gmail.com",
+    "password":"studentc123",
+    "phone":"4587457123"
 }
+
+# api call for updating student profile
+###
+PUT http://127.0.0.1:8000/accounts/profile/complete/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzNjg3NTYwLCJpYXQiOjE3OTM2ODcyNjAsImp0aSI6IjY5ZDM0MWJmZDhjMTQ4ODE4MWU4YTY0YThlMWUwZGI2IiwidXNlcl9pZCI6IjUifQ.ESg4BObN-LRr4ss6v7O9Wm58x8iqwMTTsTUir1-UlFo
+
+{
+    "skills":"python,django,drf",
+    "qualification":"bsc cs",
+    "passout_year":"2026",
+    "github_url":"https://studentc.com",
+    "linkedin_url":"https://studentc.com"
+}
+
+# api call for retreiving student profile
+###
+GET http://127.0.0.1:8000/accounts/profile/get/me/
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzNjg3OTYxLCJpYXQiOjE3OTM2ODc2NjEsImp0aSI6ImJiMTc1ZGY0NjQxZjRlZDdhNTI3NTc0YzRjNzU4NDc2IiwidXNlcl9pZCI6IjUifQ.zZ_UW6m-YoUPa0JpNQ-0deCuWW9TcOWp1yzcxWdYG3s
+
 
 # api call for token authentication
 ###
@@ -41,8 +62,8 @@ POST http://127.0.0.1:8000/accounts/jwt/token/
 Content-Type: application/json
 
 {
-    "username":"studentA",
-    "password":"studentA123"
+    "username":"studentc",
+    "password":"studentc123"
 }
 
 # api call for refresh jwt token
@@ -51,7 +72,7 @@ POST http://127.0.0.1:8000/accounts/jwt/token/refresh/
 Content-Type: application/json
 
 {
-    "refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc5MzY4ODQwMywiaWF0IjoxNzkzNjAyMDAzLCJqdGkiOiIwMzYxZmY1ODk0YTk0ZDEwYmJiMDRiNjRiYTYzNWQ2NiIsInVzZXJfaWQiOiIyIn0.B9wMWiQtQsuHMhctRCdnljFXdy64Go_mr44UQFvIYVE"
+    "refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc5Mzc3NDAzOCwiaWF0IjoxNzkzNjg3NjM4LCJqdGkiOiIxMjdhOWFlNTNiMDU0NDJmYWUyMmM4ZmViZmFmZTQyYyIsInVzZXJfaWQiOiI1In0._5IXxZe61pVE1BAUY9-vfiSHNKsWaDtZBGdYeGywtoA"
 }
 
 
